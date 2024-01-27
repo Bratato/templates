@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  plex:
+    image: "lscr.io/linuxserver/plex:latest"
+    container_name: "plex"
+    #! Uncomment for Nvidia Transcoding !#
+#    runtime: "nvidia"
+    network_mode: "host"
+    restart: "unless-stopped"
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "TZ=Etc/UTC" # Set Timezone
+      - "VERSION=docker"
+      - "PLEX_CLAIM=xxx" # Get Here: https://plex.tv/claim
+	  #! Uncomment for Nvidia Transcoding !#
+#      - "NVIDIA_VISIBLE_DEVICES=GPU-xxxxx" # Variables = 'all' or '[GPU-ID]'
+#      - "NVIDIA_DRIVER_CAPABILITIES=compute,utility,video"
+    ports:
+      - "32400:32400"
+    volumes:
+      # (Note: Remove the brackets '[]')
+      - "[/path/to/plex/config]:/config:rw"
+      # Temp Ram Transcoding
+	    - "/dev/shm:/transcode:rw"
+      # Directories where your media is stored (You can add as many volumes as you want, as long as they follow the format of the rest i.e for anime: "[/path/to/anime]:/anime"
+      - "[/path/to/tvshows]:/tvshows"
+      - "[/path/to/movies]:/movies"
+#      - "[/path/to/music]:/music"
+#      - "[/path/to/photos]:/photos"
+    #! Uncomment for Intel Quick-Sync Transcoding !#
+#    devices:
+#      - "/dev/dri:/dev/dri"
