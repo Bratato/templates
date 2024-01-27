@@ -9,7 +9,7 @@ sudo nano docker-compose.yml
 
 2. Copy & Paste [`docker-compose.yml`](https://github.com/Bratato/templates/blob/main/docker-compose/plex/docker-compose.yml) from templates to your just created `docker-compose.yml`
 
-4. Editing `docker-compose.yml` [**NOTE:** If plan on transcoding, check out [Advanced Configuration](https://github.com/Bratato/templates/blob/main/docker-compose/plex/README.md#advanced-installation) before step 4]:
+4. Editing `docker-compose.yml` [**NOTE:** If plan on transcoding, check out [Advanced Installation](https://github.com/Bratato/templates/blob/main/docker-compose/plex/README.md#advanced-installation) before step 4]:
 
 | Variable/s | Output |
 | ---------- | ------ |
