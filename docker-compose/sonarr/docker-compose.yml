@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  sonarr:
+    image: "lscr.io/linuxserver/sonarr:latest"
+    container_name: "sonarr"
+    restart: "unless-stopped"
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "TZ=Etc/UTC" # Set Timezone
+    ports:
+      - "8989:8989"
+    volumes:
+      - "[/path/to/sonarr/config]:/config:rw"
+      - "[/path/to/downloads]:/downloads:rw" # Optional (If you want to automate downloading torrents to your media server. (More here: https://github.com/linuxserver/docker-sonarr#parameters)
+      - "[/path/to/media/shows]:/media/Shows:ro"
+      # If you have more TV Show Directories add them here:
+#      - "[/path/to/media/animeshows]:/media/animeshows:ro"
