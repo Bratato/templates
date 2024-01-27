@@ -9,7 +9,7 @@ sudo nano docker-compose.yml
 3. Editing `docker-compose.yml`:
 - `TZ` - change this to your location (i.e America/New_York)
 - `PLEX_CLAIM` - Connects your plex server with your plex account. [Get Token here](https://plex.tv/claim) (*NOTE: Code lasts 5 minutes*)
-- `volumes:` - Here you must decide where plex is installed and to point where your media is for plex. Look at the example below for a reference
+- `volumes:` - Here you must decide where plex is installed and to point where your media is for plex. Go [here](https://github.com/Bratato/templates/tree/main/docker-compose/plex#example) for reference
 4. Installing Plex:
 ```bash
 sudo docker compose up -d
