@@ -14,8 +14,8 @@ services:
       - "TZ=Etc/UTC" # Set Timezone
       - "VERSION=docker"
       - "PLEX_CLAIM=xxx" # Get Here: https://plex.tv/claim
-	  #! Uncomment for Nvidia Transcoding !#
-#      - "NVIDIA_VISIBLE_DEVICES=GPU-xxxxx" # Variables = 'all' or '[GPU-ID]'
+    #! Uncomment for Nvidia Transcoding !#
+#      - "NVIDIA_VISIBLE_DEVICES=all" # Variables = 'all' or '[GPU-ID]'
 #      - "NVIDIA_DRIVER_CAPABILITIES=compute,utility,video"
     ports:
       - "32400:32400"
@@ -23,10 +23,11 @@ services:
       # (Note: Remove the brackets '[]')
       - "[/path/to/plex/config]:/config:rw"
       # Temp Ram Transcoding
-	    - "/dev/shm:/transcode:rw"
+      - "/dev/shm:/transcode:rw"
       # Directories where your media is stored (You can add as many volumes as you want, as long as they follow the format of the rest i.e for anime: "[/path/to/anime]:/anime"
       - "[/path/to/tvshows]:/tvshows"
       - "[/path/to/movies]:/movies"
+      # Uncomment for music/photos library
 #      - "[/path/to/music]:/music"
 #      - "[/path/to/photos]:/photos"
     #! Uncomment for Intel Quick-Sync Transcoding !#
