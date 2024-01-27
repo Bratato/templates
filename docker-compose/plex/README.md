@@ -1,21 +1,76 @@
-# Plex #
+![image](https://camo.githubusercontent.com/173f76fe5f892bf3ec7f6b6292b96087cda59abede869eae0e2ec3a9bcdb0298/687474703a2f2f7468652d6761646765746565722e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f31302f706c65782d6c6f676f2d65313434363939303637383637392e706e67)
 
 ## Installation ##
+
 1. Create `docker-compose.yml` (Doesn't matter where its created):
 ```bash
 sudo nano docker-compose.yml
 ```
+
 2. Copy & Paste [`docker-compose.yml`](https://github.com/Bratato/templates/blob/main/docker-compose/plex/docker-compose.yml) from templates to your just created `docker-compose.yml`
-3. Editing `docker-compose.yml`:
-- `TZ` - change this to your location (i.e America/New_York)
-- `PLEX_CLAIM` - Connects your plex server with your plex account. [Get Token here](https://plex.tv/claim) (*NOTE: Code lasts 5 minutes*)
-- `volumes:` - Here you must decide where plex is installed and to point where your media is for plex. Go [here](https://github.com/Bratato/templates/tree/main/docker-compose/plex#example) for reference
+
+4. Editing `docker-compose.yml` [**NOTE:** If plan on transcoding, check out [Advanced Configuration](templates/tree/main/docker-compose/plex#advanced_installation) before step 4]:
+
+| Variable/s | Output |
+| ---------- | ------ |
+| `TZ` | change this to your location (i.e America/New_York) |
+| `PLEX_CLAIM` | Connects your plex server with your plex account. [Get Token here](https://plex.tv/claim) (***NOTE: Code lasts 5 minutes***) |
+| `volumes:` | Here you must decide where plex is installed and to point where your media is for plex. Go [here](https://github.com/Bratato/ |templates/tree/main/docker-compose/plex#example) for reference
+
 4. Installing Plex:
 ```bash
 sudo docker compose up -d
 ```
+
 5. Done! Now you can connect to plex by using your browser
 > Example: http://[Server_IP]:32400/ (i.e http://192.168.0.23:32400/)
+
+<br>
+
+## Advanced Installation ##
+> ⚠️**NOT REQUIRED**. Can **SAFELY SKIP**, if you do not understand.
+
+### Nvidia Transcoding ###
+
+#### Installation ####
+1. Configuring the production respository:
+```bash
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+> (OPTIONAL) Configure with experimental packages:
+```bash
+sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-toolkit.list
+```
+2. Update package list:
+```bash
+sudo apt-get update
+```
+3. Installing Nvidia Container Toolkit packages:
+```bash
+sudo apt-get install -y nvidia-container-toolkit
+```
+
+#### Docker Integration ####
+1. Configure the container runtime:
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+```
+2. Restart Docker Daemon:
+```bash
+sudo systemctl restart docker
+```
+3. Uncomment `runtime` and **two** nvidia `environment:` variables
+
+### Intel Transcoding ###
+
+#### Installation ####
+1. Make sure your Intel CPU supports `Intel Quick Sync`
+2. Uncomment `devices:` and `- "/dev/dri:/dev/dri"`
+
+<br>
 
 ## Example ## 
 > ⚠️WARNING: Only use this example to compare to your own `docker-compose.yml`, otherwise the installation might mess up.
@@ -37,7 +92,7 @@ services:
       - "VERSION=docker"
       - "PLEX_CLAIM=abcdefghijk1234567890lmnopqrs" # Get Here: https://plex.tv/claim
       #! Uncomment for Nvidia Transcoding !#
-#      - "NVIDIA_VISIBLE_DEVICES=GPU-xxxxx" # Variables = 'all' or '[GPU-ID]'
+#      - "NVIDIA_VISIBLE_DEVICES=all" # Variables = 'all' or '[GPU-ID]'
 #      - "NVIDIA_DRIVER_CAPABILITIES=compute,utility,video"
     ports:
       - "32400:32400"
@@ -56,5 +111,9 @@ services:
 #      - "/dev/dri:/dev/dri"
 ```
 
+<br>
+
 ### References ###
-> [Plex Documentation](https://github.com/linuxserver/docker-plex)
+- [Plex Documentation](https://github.com/linuxserver/docker-plex)
+- [Nvidia Transcoding Documentation](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- [Intel Transcoding Documentation](https://github.com/linuxserver/docker-plex#hardware-acceleration)
