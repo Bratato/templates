@@ -1,4 +1,4 @@
-![image](https://camo.githubusercontent.com/173f76fe5f892bf3ec7f6b6292b96087cda59abede869eae0e2ec3a9bcdb0298/687474703a2f2f7468652d6761646765746565722e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031352f31302f706c65782d6c6f676f2d65313434363939303637383637392e706e67)
+![image](https://github.com/Bratato/templates/blob/main/docker-compose/plex/Plex-Logo.png)
 
 ## Installation ##
 
