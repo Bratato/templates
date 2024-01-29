@@ -12,6 +12,7 @@ services:
     ports:
       - "8989:8989"
     volumes:
+      # (Note: Remove the brackets '[]')
       - "[/path/to/sonarr/config]:/config:rw"
       - "[/path/to/downloads]:/downloads:rw" # Optional (For automating downloading torrents)
       - "[/path/to/media/shows]:/media/Shows:ro"
