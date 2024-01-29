@@ -15,7 +15,8 @@ sudo nano docker-compose.yml
 | ---------- | ------ |
 | `TZ` | change this to your location (i.e America/New_York) |
 | `PLEX_CLAIM` | Connects your plex server with your plex account. [Get Token here](https://plex.tv/claim) (***NOTE: Code lasts 5 minutes***) |
-| `volumes:` | Here you must decide where plex is installed and to point where your media is for plex. Go [here](https://github.com/Bratato/ |templates/tree/main/docker-compose/plex#example) for reference
+| `volumes: /media` | Here you must decide where plex is installed and to point where your media is for plex. Go [here](https://github.com/Bratato/templates/tree/main/docker-compose/plex#example) for reference |
+| `volumes: /transcode` | (Don't Change this) RAM Temporary Transcoding Storage | 
 
 4. Installing Plex:
 ```bash
@@ -97,7 +98,6 @@ services:
     ports:
       - "32400:32400"
     volumes:
-      # (Note: Remove the brackets '[]')
       - "/etc/docker/plex/config:/config:rw"
       # Temp Ram Transcoding
       - "/dev/shm:/transcode:rw"
