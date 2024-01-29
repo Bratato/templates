@@ -13,7 +13,7 @@ services:
       - "8989:8989"
     volumes:
       - "[/path/to/sonarr/config]:/config:rw"
-      - "[/path/to/downloads]:/downloads:rw" # Optional (If you want to automate downloading torrents to your media server. (More here: https://github.com/linuxserver/docker-sonarr#parameters)
+      - "[/path/to/downloads]:/downloads:rw" # Optional (For automating downloading torrents)
       - "[/path/to/media/shows]:/media/Shows:ro"
       # If you have more TV Show Directories add them here:
 #      - "[/path/to/media/animeshows]:/media/animeshows:ro"
