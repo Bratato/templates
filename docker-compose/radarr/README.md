@@ -1,4 +1,4 @@
-![image](https://radarr.video/img/logo-full.png)
+![image](https://github.com/Bratato/templates/blob/main/docker-compose/radarr/radarr-logo.png)
 
 
 ## Installation ##
