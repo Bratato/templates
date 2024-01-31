@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  prowlarr:
+    image: "lscr.io/linuxserver/prowlarr:latest"
+    container_name: "prowlarr"
+    restart: "unless-stopped"
+    environment:
+      - "PUID=1000"
+      - "PGID=1000"
+      - "TZ=Etc/UTC" # Set Timezone
+    ports:
+      - "9696:9696"
+    volumes:
+      # (Note: Remove the brackets '[]')
+      - "[/path/to/prowlarr/config]:/config:rw"
