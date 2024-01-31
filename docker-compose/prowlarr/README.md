@@ -1,4 +1,4 @@
-![image](https://github.com/Bratato/templates/blob/main/docker-compose/prowlarr/prowlarr-logo.png)
+![image](https://github.com/Bratato/templates/blob/main/docker-compose/prowlarr/Prowlarr-Logo.png)
 
 
 ## Installation ##
