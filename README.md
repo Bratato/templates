@@ -1,7 +1,7 @@
 # Howies `Templates` #
-This is my personal respository that will hold all my the `Templates` I use in my homelab environment.  
+Respository that will hold my `Templates` I use in my homelab.  
 
-Good to note that this was made for the latest version of **Ubuntu Server LTS**  
+Note this was made with **Ubuntu Server LTS**  
 
 #### Disclaimer: ####
-> ⚠️This may become outdated, best to always check when I last updated the template folder
+> ⚠️This may become outdated, best to check last updated.
