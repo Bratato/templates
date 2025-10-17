@@ -3,7 +3,7 @@
 
 ## Installation ##
 
-1. Create `docker-compose.yml` (Doesn't matter where its created):
+1. Create `docker-compose.yml`:
 ```bash
 sudo nano docker-compose.yml
 ```
@@ -27,25 +27,23 @@ sudo docker compose up -d
 
 ## Example ##
 ```yml
-version: "3"
-
 services:
   sonarr:
-    image: "lscr.io/linuxserver/sonarr:latest"
-    container_name: "sonarr"
-    restart: "unless-stopped"
-    environment:
-      - "PUID=1000"
-      - "PGID=1000"
-      - "TZ=America/New_York" # Set Timezone
+    container_name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     ports:
-      - "8989:8989"
+      - '8989:8989'
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/New_York' # Set Timezone
     volumes:
-      - "/etc/docker/sonarr/config:/config:rw"
-      - "/etc/docker/downloads:/downloads:rw" # Optional (For automating downloading torrents)
-      - "/media/shows:/media/Shows:ro"
+      - /etc/docker/sonarr/config:/config:rw
+      - /etc/docker/downloads:/downloads:rw # Optional (For automating downloading torrents)
+      - /media/shows:/media/Shows:ro
       # If you have more TV Show Directories add them here:
-      - "/media/animeshows:/media/animeshows:ro"
+      - /media/animeshows:/media/animeshows:ro
+    restart: unless-stopped
 ```
 
 <br>
