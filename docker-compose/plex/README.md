@@ -79,7 +79,7 @@ sudo systemctl restart docker
 services:
   plex:
     container_name: plex
-    image: "lscr.io/linuxserver/plex:latest"
+    image: lscr.io/linuxserver/plex:latest
     #! Uncomment for Nvidia Transcoding !#
 #    runtime: nvidia
     network_mode: host
