@@ -3,7 +3,7 @@
 
 ## Installation ##
 
-1. Create `docker-compose.yml` (Doesn't matter where its created):
+1. Create `docker-compose.yml`:
 ```bash
 sudo nano docker-compose.yml
 ```
@@ -25,21 +25,19 @@ sudo docker compose up -d
 
 ## Example ##
 ```yml
-version: "3"
-
 services:
   prowlarr:
-    image: "lscr.io/linuxserver/prowlarr:latest"
-    container_name: "prowlarr"
-    restart: "unless-stopped"
-    environment:
-      - "PUID=1000"
-      - "PGID=1000"
-      - "TZ=America/New_York" # Set Timezone
+    container_name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
     ports:
-      - "9696:9696"
+      - '9696:9696'
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/New_York' # Set Timezone
     volumes:
-      - "/etc/docker/prowlarr/config:/config:rw"
+      - /etc/docker/prowlarr/config:/config:rw
+    restart: unless-stopped
 ```
 
 <br>
