@@ -1,20 +1,18 @@
-version: "3"
-
 services:
   sonarr:
-    image: "lscr.io/linuxserver/radarr:latest"
-    container_name: "radarr"
-    restart: "unless-stopped"
-    environment:
-      - "PUID=1000"
-      - "PGID=1000"
-      - "TZ=Etc/UTC" # Set Timezone
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
     ports:
-      - "7878:7878"
+      - '7878:7878'
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'Etc/UTC' # Set Timezone
     volumes:
       # (Note: Remove the brackets '[]')
-      - "[/path/to/radarr/config]:/config:rw"
-      - "[/path/to/downloads]:/downloads:rw" # Optional (For automating downloading torrents)
-      - "[/path/to/media/movies]:/media/Shows:ro"
+      - [/path/to/radarr/config]:/config:rw
+      - [/path/to/downloads]:/downloads:rw # Optional (For automating downloading torrents)
+      - [/path/to/media/movies]:/media/Shows:ro
       # If you have more TV Show Directories add them here:
-#      - "[/path/to/media/animemovies]:/media/animeshows:ro"
+#      - [/path/to/media/animemovies]:/media/animeshows:ro
+    restart: unless-stopped
