@@ -2,7 +2,7 @@
 
 ## Installation ##
 
-1. Create `docker-compose.yml` (Doesn't matter where its created):
+1. Create `docker-compose.yml`:
 ```bash
 sudo nano docker-compose.yml
 ```
@@ -29,7 +29,7 @@ sudo docker compose up -d
 <br>
 
 ## Advanced Installation ##
-> ⚠️**NOT REQUIRED**. Can **SAFELY SKIP**, if you do not understand.
+> ⚠️**OPTIONAL**
 
 ### Nvidia Transcoding ###
 
@@ -76,39 +76,37 @@ sudo systemctl restart docker
 ## Example ## 
 > ⚠️WARNING: Only use this example to compare to your own `docker-compose.yml`, otherwise the installation might mess up.
 ```yml
-version: "3"
-
 services:
   plex:
+    container_name: plex
     image: "lscr.io/linuxserver/plex:latest"
-    container_name: "plex"
     #! Uncomment for Nvidia Transcoding !#
-#    runtime: "nvidia"
-    network_mode: "host"
-    restart: "unless-stopped"
-    environment:
-      - "PUID=1000"
-      - "PGID=1000"
-      - "TZ=America/New_York" # Set Timezone
-      - "VERSION=docker"
-      - "PLEX_CLAIM=abcdefghijk1234567890lmnopqrs" # Get Here: https://plex.tv/claim
-      #! Uncomment for Nvidia Transcoding !#
-#      - "NVIDIA_VISIBLE_DEVICES=all" # Variables = 'all' or '[GPU-ID]'
-#      - "NVIDIA_DRIVER_CAPABILITIES=compute,utility,video"
+#    runtime: nvidia
+    network_mode: host
     ports:
-      - "32400:32400"
+      - '32400:32400'
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/New_York' # Set Timezone
+      VERSION: 'docker'
+      PLEX_CLAIM: 'abcdefghijk1234567890lmnopqrs' # Get Here: https://plex.tv/claim
+      #! Uncomment for Nvidia Transcoding !#
+#      NVIDIA_VISIBLE_DEVICES: 'all' # Variables = 'all' or '[GPU-ID]'
+#      NVIDIA_DRIVER_CAPABILITIES: 'compute,utility,video'
     volumes:
-      - "/etc/docker/plex/config:/config:rw"
+      - /etc/docker/plex/config:/config:rw
       # Temp Ram Transcoding
-      - "/dev/shm:/transcode:rw"
+      - /dev/shm:/transcode:rw
       # Directories where your media is stored (You can add as many volumes as you want, as long as they follow the format of the rest i.e for anime: "[/path/to/anime]:/anime"
-      - "/media/shows:/tvshows"
-      - "/media/movies:/movies"
-      - "/media/music:/music"
-#      - "[/path/to/photos]:/photos"
-    #! Uncomment for Intel Quick-Sync Transcoding !#
+      - /media/shows:/tvshows
+      - /media/movies:/movies
+      - /media/music:/music
+#      - [/path/to/photos]:/photos
+    #! Uncomment for Intel Transcoding !#
 #    devices:
-#      - "/dev/dri:/dev/dri"
+#      - /dev/dri:/dev/dri
+    restart: unless-stopped
 ```
 
 <br>
