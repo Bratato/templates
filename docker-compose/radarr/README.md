@@ -3,7 +3,7 @@
 
 ## Installation ##
 
-1. Create `docker-compose.yml` (Doesn't matter where its created):
+1. Create `docker-compose.yml`:
 ```bash
 sudo nano docker-compose.yml
 ```
@@ -27,25 +27,23 @@ sudo docker compose up -d
 
 ## Example ##
 ```yml
-version: "3"
-
 services:
   radarr:
-    image: "lscr.io/linuxserver/radarr:latest"
-    container_name: "radarr"
-    restart: "unless-stopped"
-    environment:
-      - "PUID=1000"
-      - "PGID=1000"
-      - "TZ=America/New_York" # Set Timezone
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
     ports:
-      - "7878:7878" # Port Change
+      - '7878:7878' # Port Change
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: 'America/New_York' # Set Timezone
     volumes:
-      - "/etc/docker/radarr/config:/config:rw"
-      - "/etc/docker/downloads:/downloads:rw" # Optional (For automating downloading torrents)
-      - "/media/server/Movies:/media/Movies:ro"
+      - /etc/docker/radarr/config:/config:rw
+      - /etc/docker/downloads:/downloads:rw # Optional (For automating downloading torrents)
+      - /media/server/Movies:/media/Movies:ro
       # If you have more Movie Directories add them here:
-      - "/media/server/Anime Movies:/media/AnimeMovies:ro"
+      - /media/server/Anime Movies:/media/AnimeMovies:ro
+    restart: unless-stopped
 ```
 
 <br>
